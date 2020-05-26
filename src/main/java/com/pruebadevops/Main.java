@@ -18,7 +18,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-//import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
@@ -33,7 +32,7 @@ public class Main {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response GetData(@HeaderParam("X-Parse-REST-API-Key") String token,
-                            @RequestParam("to") String mensaje)
+                            @RequestParam(value = "to") String mensaje)
     {
         boolean status = DAO.validar("X-Parse-REST-API-Key", token);
         
@@ -48,9 +47,9 @@ public class Main {
             JsonObject json = Json.createObjectBuilder()
                     .add("JWT", jwt)
                     .build();
-            System.out.println("HttpRequest WORKED" + token);
-            return Response.status(Response.Status.CREATED).allow("message:" + "Hello " + mensaje + "your message will be send") .build();            
+            
+            return Response.ok("message: Hello your message will be send").build();
         }
-        return Response.status(Response.Status.UNAUTHORIZED).build();
+        return Response.serverError().build();
     }
 }
