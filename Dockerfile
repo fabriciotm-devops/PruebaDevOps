@@ -7,4 +7,4 @@ MAINTAINER DevOps "fabriciotm@hotmail.com"
 
 COPY target/PruebaDevOps-1.0-SNAPSHOT.war /
 
-EXPOSE 80
+EXPOSE 8080
